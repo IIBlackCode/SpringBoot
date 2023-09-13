@@ -28,12 +28,12 @@ jobs:
       # 1. gradle buile를 위한 권한 부여
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-        working-directory: demo-jar # 1.프로젝트 변경시 수정사항
+        working-directory: BLACKCODE # 1.프로젝트 변경시 수정사항
       
       # 2. Gradle build 진행
       - name: Build with Gradle
         run : |
-          cd demo-jar             # 해당 디렉토리로 이동 # 2.프로젝트 변경시 수정사항
+          cd BLACKCODE             # 해당 디렉토리로 이동 # 2.프로젝트 변경시 수정사항
           ./gradlew build -x test # Gradle 빌드 실행
       
       # 3. 배포할 파일의 경로를 확인
@@ -66,5 +66,5 @@ jobs:
           app-name: 'os-Linux-as'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48D6E285FD6F40278A80EC8326A7A5A1 }}
-          package: '*SNAPSHOT.jar'
+          package: '*SNAPSHOT.war'
           # package: '*.jar'
