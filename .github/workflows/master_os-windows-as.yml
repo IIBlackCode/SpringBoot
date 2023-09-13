@@ -41,9 +41,8 @@ jobs:
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
-        working-directory: BLACKCODE/build/libs
         with:
           app-name: 'os-Windows-as'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E98AA71A588C492B96D8F9DE0B69465D }}
-          package: 'ROOT.war'
+          package: '${{ github.workspace }}/BLACKCODE/build/libs/ROOT.war'
