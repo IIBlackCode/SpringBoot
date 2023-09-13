@@ -40,4 +40,4 @@ jobs:
           app-name: 'os-Windows-as'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E98AA71A588C492B96D8F9DE0B69465D }}
-          package: '*SNAPSHOT.war'
+          package: '*SNAPSHOT.jar'
