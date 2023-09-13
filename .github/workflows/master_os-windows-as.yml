@@ -33,12 +33,17 @@ jobs:
         run : |
           cd BLACKCODE
           ./gradlew build -x test # Gradle 빌드 실행
+
+      - name: Rename War
+        run : mv ROOT-0.0.1-SNAPSHOT.war ROOT.war
+        working-directory: BLACKCODE/build/libs
           
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
+        working-directory: BLACKCODE/build/libs
         with:
           app-name: 'os-Windows-as'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E98AA71A588C492B96D8F9DE0B69465D }}
-          package: '*SNAPSHOT.war'
+          package: 'ROOT.war'
