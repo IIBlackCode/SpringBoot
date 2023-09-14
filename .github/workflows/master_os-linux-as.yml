@@ -36,6 +36,11 @@ jobs:
           cd BLACKCODE             # 해당 디렉토리로 이동 # 2.프로젝트 변경시 수정사항
           ./gradlew build -x test # Gradle 빌드 실행
       
+      # war 배포시 war파일명 ROOT로 변
+      - name: Rename War
+        run : mv ROOT-0.0.1-SNAPSHOT.war ROOT.war
+        working-directory: BLACKCODE/build/libs
+      
       # 3. 배포할 파일의 경로를 확인
       - name: Check path
         run: ls -lR
