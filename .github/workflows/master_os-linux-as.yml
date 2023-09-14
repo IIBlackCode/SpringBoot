@@ -35,29 +35,6 @@ jobs:
         run : |
           cd BLACKCODE             # 해당 디렉토리로 이동 # 2.프로젝트 변경시 수정사항
           ./gradlew build -x test # Gradle 빌드 실행
-      
-      # 3. 배포할 파일의 경로를 확인
-      # - name: Check path
-        # run: ls -lR
-
-      # - name: Upload artifact for deployment job
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: java-app
-      #     path: '${{ github.workspace }}/BLACKCODE/build/libs/*.war' # 3.프로젝트 변경시 수정사항
-
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   environment:
-  #     name: 'Production'
-  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
-    # steps:
-      # - name: Download artifact from build job
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: java-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
