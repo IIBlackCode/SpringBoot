@@ -21,14 +21,34 @@ jobs:
         with:
           java-version: '17'
 
-      - name: Build with Maven
-        run: mvn clean install
+      # - name: Build with Maven
+        # run: mvn clean install
+
+      # 수정내역 
+      # 1. gradle buile를 위한 권한 부여
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        working-directory: BLACKCODE # 1.프로젝트 변경시 수정사항
+      
+      # 2. Gradle build 진행
+      - name: Build with Gradle
+        run : |
+          cd BLACKCODE             # 해당 디렉토리로 이동 # 2.프로젝트 변경시 수정사항
+          ./gradlew build -x test # Gradle 빌드 실행
+      
+      # 3. 배포할 파일의 경로를 확인
+      - name: Check path
+        run: ls -lR
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/BLACKCODE/build/libs/*.war' # 3.프로젝트 변경시 수정사항
+
+      # 4. artifact 생성 확인
+      - name: List files in build/libs directory
+        run: ls BLACKCODE/build/libs # 4.프로젝트 변경시 수정사항
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,4 +70,5 @@ jobs:
           app-name: 'os-Linux-as'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0081A84C3AB845AAA8CFD493B3094428 }}
-          package: '*.jar'
+          package: '*SNAPSHOT.war'
+          # package: '*.jar'
