@@ -1,7 +1,7 @@
 # SpringBoot
 
 # WebApp 배포 yaml
----
+```
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
@@ -75,6 +75,5 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3189047D09AC475C990FBF228C90732E }}
           # package: '*.ar'
           package: '*SNAPSHOT.war'
-
+```
 # AKS 배포 yaml
----
