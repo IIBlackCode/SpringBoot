@@ -75,5 +75,5 @@ jobs:
           app-name: 'os-Linux-as'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0081A84C3AB845AAA8CFD493B3094428 }}
-          package: '*SNAPSHOT.war'
+          package: 'ROOT.war'
           # package: '*.jar'
