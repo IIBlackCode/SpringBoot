@@ -21,28 +21,14 @@ jobs:
         with:
           java-version: '17'
 
-      # 수정내역 
-      # 1. gradle buile를 위한 권한 부여
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-        working-directory: demo-jar # 1.프로젝트 변경시 수정사항
-        # working-directory: BLACKCODE # 1.프로젝트 변경시 수정사항
-      
-      # 2. Gradle build 진행
-      - name: Build with Gradle
-        run : |
-          cd demo-jar
-          ./gradlew build -x test # Gradle 빌드 실행
+      - name: Build with Maven
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/demo-jar/build/libs/*.jar' # 3.프로젝트 변경시 수정사항
-      
-      # 4. artifact 생성 확인
-      - name: List files in build/libs directory
-        run: ls demo-jar/build/libs # 4.프로젝트 변경시 수정사항  
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -63,5 +49,5 @@ jobs:
         with:
           app-name: 'FE-as'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8421E0202EA64C3F8888ED254B3A0636 }}
-          package: '*SNAPSHOT.jar'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9A6D90381F33418D9AE49A5630C5CDD5 }}
+          package: '*.jar'
