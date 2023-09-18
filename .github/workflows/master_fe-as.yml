@@ -33,7 +33,8 @@ jobs:
         run : |
           cd demo-jar
           ./gradlew build -x test # Gradle 빌드 실행
-
+      
+      # 3. path 수정
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -53,7 +54,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: java-app
-
+      # 4. package 수정
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -61,4 +62,4 @@ jobs:
           app-name: 'FE-as'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9A6D90381F33418D9AE49A5630C5CDD5 }}
-          package: '*SNAPSHOT.jar'
+          package: '*SNAPSHOT.jar' # 수정 : *.jar > SNAPSHOT.jar
